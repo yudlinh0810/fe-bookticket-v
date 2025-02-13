@@ -97,11 +97,11 @@ const Footer = () => {
           <ul className="footer-links">
             <li className="mg--1">
               <h4 className="text-start perano-800 font-medium">IUA Bus Lines</h4>
-              <LinkList items={linksAbout} />
+              <LinkList linkList={linksAbout} />
             </li>
             <li className="mg-t-1 mg-b-1">
               <h4 className="text-start perano-800 font-medium">Hỗ Trợ</h4>
-              <LinkList items={linksSupport} />
+              <LinkList linkList={linksSupport} />
             </li>
           </ul>
         </div>
@@ -111,22 +111,3 @@ const Footer = () => {
 };
 
 export default Footer;
-
-// const example = {
-//   productList: {
-//     productItem: {
-//       product: {
-//         header: {
-
-//         },
-//         body: {
-//           title: '',
-//           description, ''
-//         },
-//         footer: {
-//           action
-//         }
-//       }
-//     }
-//   }
-// }
