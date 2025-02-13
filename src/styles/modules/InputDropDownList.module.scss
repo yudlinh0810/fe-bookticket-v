@@ -1,0 +1,48 @@
+.input-drop-list {
+  position: relative;
+
+  background-color: #f0f7fd;
+
+  width: 12rem;
+  height: 2.6rem;
+  padding: 0.6rem;
+  border-radius: 1rem 0.6rem;
+
+  &:hover {
+    cursor: pointer;
+  }
+
+  .ic-search {
+    display: flex;
+    align-items: center;
+    border: none;
+    margin-right: 0.4rem;
+    .ic {
+      width: 1.4rem;
+      height: 1.4rem;
+    }
+  }
+  .search-locations {
+    background-color: #f0f7fd;
+
+    .title {
+      margin-left: 0.1rem;
+      margin-bottom: 0.2rem;
+
+      font-size: 0.8rem;
+      color: var(--gray);
+    }
+  }
+  .triangle-bottom {
+    top: 120%;
+    right: 0;
+  }
+  .drop-down-list {
+    position: absolute;
+    top: 100%;
+    left: 0;
+
+    width: 12rem;
+    height: 10rem;
+  }
+}
