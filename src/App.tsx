@@ -1,31 +1,22 @@
-import { BrowserRouter as Router, Routes, Route } from 'react-router';
-import './App.css';
-import './styles/Root.css';
-import HomePage from './pages/HomePage';
-import MainLayout from './layouts/MainLayout';
-import { useEffect } from 'react';
+import { BrowserRouter as Router, Routes, Route } from "react-router";
+import "./App.scss";
+import "./styles/Root.scss";
+import "./styles/Reset.scss";
+import HomePage from "./pages/HomePage";
+import Layout from "./layouts/Layout";
+import useClientWidth from "./utils/useClientWidth";
 
 function App() {
-  const updateClientWidth = () => {
-    const clientWidth = document.documentElement.clientWidth;
-    console.log('client-width', clientWidth);
-    document.documentElement.style.setProperty('--client-width', `${clientWidth}px`);
-  };
-  useEffect(() => {
-    updateClientWidth();
-    window.addEventListener('resize', updateClientWidth);
-    return () => window.removeEventListener('resize', updateClientWidth);
-  }, []);
+  useClientWidth();
   return (
     <Router>
       <Routes>
         <Route
           index
-          path='/'
           element={
-            <MainLayout>
+            <Layout>
               <HomePage />
-            </MainLayout>
+            </Layout>
           }
         />
       </Routes>
