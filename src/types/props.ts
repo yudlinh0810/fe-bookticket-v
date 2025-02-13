@@ -22,3 +22,13 @@ export interface CustomLinkProps {
   title?: string;
   children?: React.ReactNode;
 }
+
+export interface LinkItem {
+  title?: string;
+  to: string;
+  href?: string;
+}
+
+export interface LinkListProps {
+  linkList: LinkItem[];
+}
