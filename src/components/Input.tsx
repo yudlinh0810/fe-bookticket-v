@@ -3,7 +3,7 @@ import styled from "../styles/modules/Input.module.scss";
 import { InputProps } from "../types/props";
 
 const Input = forwardRef<HTMLInputElement, InputProps>(
-  ({ type = "text", valueIn, placeholder = "...", onChange, onFocus }, ref) => {
+  ({ type = "text", value, placeholder = "...", onChange, onFocus }, ref) => {
     const handleFocus = (event: React.FocusEvent<HTMLInputElement>) => {
       if (onFocus) {
         onFocus(document.activeElement === event.target);
@@ -22,7 +22,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
           className={styled["input-search"]}
           type={type}
           ref={ref}
-          value={valueIn}
+          value={value}
           onChange={onChangeInput}
           placeholder={placeholder}
           onFocus={handleFocus}
