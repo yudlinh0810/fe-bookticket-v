@@ -1,0 +1,52 @@
+.content-hotline {
+  position: absolute;
+  top: calc((100% + 1rem));
+  right: 0;
+
+  width: max-content;
+
+  padding: 0.4rem;
+  border-radius: 0.8rem;
+
+  transform-origin: top right;
+  // transform: scaleX(0.99);
+  opacity: 0.8;
+  visibility: hidden;
+
+  background-color: #fff;
+
+  cursor: default;
+
+  transition: opacity 0.2s ease-out, visibility 0.2s ease-out;
+
+  &.show {
+    visibility: visible;
+    // transform: scaleX(1);
+    opacity: 1;
+  }
+
+  .list-hotline {
+    .item-hotline {
+      display: flex;
+      padding: 0.6rem;
+
+      .font-size {
+        font-size: 0.875rem;
+      }
+      .phone {
+        color: #5673d5;
+
+        &::after {
+          content: " - ";
+        }
+      }
+      .note {
+        color: #000;
+        cursor: auto;
+        &::before {
+          content: "- ";
+        }
+      }
+    }
+  }
+}
