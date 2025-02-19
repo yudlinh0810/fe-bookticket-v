@@ -1,22 +1,23 @@
-import { memo, useRef, useState } from "react";
+import { memo, useEffect, useRef, useState } from "react";
 import styled from "../styles/modules/InputDropDownList.module.scss";
 import { removeDiacritics } from "../utils/removeDiacritics";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faLocationDot } from "@fortawesome/free-solid-svg-icons";
 import DropDownList from "./DropDownList";
-import triangle from "../styles/modules/Triangle.module.scss";
 import Input from "./Input";
 import { InputDropDownProps } from "../types/props";
+import IconDestination from "./IconDestination";
 
 const InputDropDownList: React.FC<InputDropDownProps> = ({
   list,
   contentPlaceholder = "",
   searchTitle = "",
-  defaultValue = "",
+  valueIn = "Đà Nẵng",
+  location = "departure",
   onSelected, //  Thêm prop để truyền giá trị ra ngoài
   onChangeValue,
 }) => {
-  const [value, setValue] = useState<string>(defaultValue);
+  const [value, setValue] = useState<string>(valueIn);
   const [valueList, setValueList] = useState<string[]>(list);
   const containerRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
@@ -27,7 +28,7 @@ const InputDropDownList: React.FC<InputDropDownProps> = ({
     if (onChangeValue) {
       onChangeValue(value);
     }
-    const queryFilter = removeDiacritics(value.toLocaleLowerCase());
+    const queryFilter = removeDiacritics(value.toLocaleLowerCase().trim());
     setValue(value);
     if (!value) {
       setValueList(list);
@@ -41,8 +42,9 @@ const InputDropDownList: React.FC<InputDropDownProps> = ({
   //
 
   const handleSelected = (value: string) => {
+    console.log("selected-Input", value);
     setValue(value);
-    if (onSelected) {
+    if (value && onSelected) {
       //  If component father function transmission
       onSelected(value);
       setIsDropDownVisible(false);
@@ -54,33 +56,54 @@ const InputDropDownList: React.FC<InputDropDownProps> = ({
     inputRef.current?.select();
     setIsDropDownVisible(true);
   };
+
   //
 
-  const handleOnMouseOut = (event: React.MouseEvent<HTMLDivElement>) => {
-    if (isDropDownVisible) {
-      if (
-        !containerRef.current?.contains(event.relatedTarget as Node) &&
-        !dropDownListRef.current?.contains(event.relatedTarget as Node)
-      ) {
-        setIsDropDownVisible(false);
-        inputRef.current?.blur();
-      }
+  // const handleOnMouseOut = (event: React.MouseEvent<HTMLDivElement>) => {
+  //   if (isDropDownVisible) {
+  //     if (
+  //       !containerRef.current?.contains(event.relatedTarget as Node) &&
+  //       !dropDownListRef.current?.contains(event.relatedTarget as Node)
+  //     ) {
+  //       setIsDropDownVisible(false);
+  //       inputRef.current?.blur();
+  //     }
+  //   }
+  // };
+
+  const handleBlur = (event: React.FocusEvent<HTMLDivElement>) => {
+    if (
+      isDropDownVisible &&
+      !containerRef.current?.contains(event.relatedTarget as Node) &&
+      !dropDownListRef.current?.contains(event.relatedTarget as Node)
+    ) {
+      setIsDropDownVisible(false);
+      inputRef.current?.blur();
     }
   };
+
+  useEffect(() => {
+    setValue(valueIn);
+  }, [valueIn]);
+
   return (
     <div
       ref={containerRef}
       className={styled["input-drop-list"]}
-      onMouseOut={handleOnMouseOut}
+      // onMouseOut={handleOnMouseOut}
+      onBlur={handleBlur}
       onClick={handleClick}
     >
-      <div className="d-flex">
+      <div className={`${styled["input-location"]} d-flex`}>
         <div className={styled["ic-search"]}>
-          <FontAwesomeIcon
-            className={styled.ic}
-            icon={faLocationDot}
-            style={{ color: "#e01010" }}
-          />
+          {location === "departure" ? (
+            <FontAwesomeIcon
+              className={`${styled.ic} ${styled["ic-departure"]}`}
+              icon={faLocationDot}
+            />
+          ) : (
+            <IconDestination />
+          )}
         </div>
         <div className={styled["search-locations"]}>
           <div className={styled.title}>
@@ -89,19 +112,15 @@ const InputDropDownList: React.FC<InputDropDownProps> = ({
           <Input
             ref={inputRef}
             type="text"
-            valueIn={value}
-            defaultValue={value}
+            value={value}
             onChange={handleOnChange}
             placeholder={contentPlaceholder}
           />
         </div>
       </div>
       {isDropDownVisible && (
-        <span className={triangle["triangle-bottom"] + styled["triangle-bottom"]}></span>
-      )}
-      {isDropDownVisible && (
         <div ref={dropDownListRef} className={styled["drop-down-list"]}>
-          <DropDownList list={valueList} onSelect={handleSelected} />
+          <DropDownList list={valueList} onSelected={handleSelected} />
         </div>
       )}
     </div>

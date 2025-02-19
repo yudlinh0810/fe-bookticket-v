@@ -3,13 +3,14 @@
   max-height: max(100%, 10rem);
   width: 100%;
   padding: 0.6rem;
+  border-radius: 0.825rem;
 
   overflow-y: auto;
   overflow-x: hidden;
 
   background-color: #f0f7fd;
 
-  font-size: 1.2rem;
+  font-size: 0.925rem;
 
   .drop-item {
     width: calc((100% - 0.8rem));
