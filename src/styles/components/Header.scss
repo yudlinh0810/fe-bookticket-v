@@ -1,0 +1,66 @@
+.header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  height: 4rem;
+  width: 100%;
+  border-radius: 0 0 0.8rem 0.8rem;
+  background-color: rgb(36, 116, 229);
+
+  .header-container {
+    width: 92.5rem;
+    max-width: 92.5rem;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    .header-left {
+      align-items: center;
+
+      .commit {
+        max-width: 18rem;
+        margin-left: 1rem;
+
+        color: #fff;
+        word-break: normal;
+      }
+    }
+
+    // .header-right {
+    .list-feature {
+      gap: 1rem;
+      .item-feature {
+        padding: 0.4rem;
+      }
+      .content {
+        color: #fff;
+      }
+      .hotline {
+        position: relative;
+
+        gap: 0.4rem;
+
+        border-radius: 0.4rem;
+
+        background-color: #fff;
+        color: #000;
+        cursor: pointer;
+      }
+      .btn-login {
+        font-size: 0.9rem;
+
+        padding: 0.4rem;
+        border: none;
+        border-radius: 0.4rem;
+
+        cursor: pointer;
+
+        &:hover {
+        }
+      }
+    }
+    // }
+  }
+}
