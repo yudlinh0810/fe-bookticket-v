@@ -1,15 +1,9 @@
 import React, { forwardRef } from "react";
-import styled from "../styles/modules/Input.module.scss";
+import styled from "../styles/modules/components/Input.module.scss";
 import { InputProps } from "../types/props";
 
 const Input = forwardRef<HTMLInputElement, InputProps>(
-  ({ type = "text", value, placeholder = "...", onChange, onFocus }, ref) => {
-    const handleFocus = (event: React.FocusEvent<HTMLInputElement>) => {
-      if (onFocus) {
-        onFocus(document.activeElement === event.target);
-      }
-    };
-
+  ({ type = "text", value, placeholder = "...", onChange }, ref) => {
     const onChangeInput = (event: React.ChangeEvent<HTMLInputElement>) => {
       const inputValue = event.target.value;
       if (onChange) {
@@ -25,7 +19,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
           value={value}
           onChange={onChangeInput}
           placeholder={placeholder}
-          onFocus={handleFocus}
+          // onFocus={handleFocus}
         />
       </>
     );
