@@ -7,9 +7,16 @@ interface ContentHotlineProps {
 }
 
 const ContentHotLine = forwardRef<HTMLDivElement, ContentHotlineProps>(({ show = false }, ref) => {
+  const handleMouseDown = (event: React.MouseEvent<HTMLDivElement>) => {
+    event.stopPropagation(); // Ngăn sự kiện click lan ra ngoài
+  };
+
   return (
-    // <div className={`${styled["content-hotline"]} ${show ? styled.show : ""}`}>
-    <div ref={ref} className={`${styled["content-hotline"]} ${show ? styled.show : ""}`}>
+    <div
+      ref={ref}
+      className={`${styled["content-hotline"]} ${show ? styled.show : ""}`}
+      onClick={handleMouseDown}
+    >
       <ul className={styled["list-hotline"]}>
         <li className={styled["item-hotline"]}>
           <CustomLink
@@ -40,6 +47,7 @@ const ContentHotLine = forwardRef<HTMLDivElement, ContentHotlineProps>(({ show =
           <p className={`${styled.note} ${styled["font-size"]}`}>Để đặt vé qua điện thoại (24/7)</p>
         </li>
       </ul>
+      <div className={styled.triangle}></div>
     </div>
   );
 });
