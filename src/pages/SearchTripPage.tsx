@@ -1,18 +1,18 @@
 import { useState } from "react";
 import SearchTrip from "../components/SearchTrip";
 import RadioGroup from "../components/RadioGroup";
-import Trip from "../components/Trip";
+// import Trip from "../components/Trip";
 
-interface Trip {
-  id: string;
-  departure: string;
-  destination: string;
-  day_departure: string;
-  price: number;
-}
+// interface Trip {
+//   id: string;
+//   departure: string;
+//   destination: string;
+//   day_departure: string;
+//   price: number;
+// }
 
 const SearchTripPage: React.FC = () => {
-  const [listTrip, setListTrip] = useState<Trip[]>([]);
+  // const [listTrip, setListTrip] = useState<Trip[]>([]);
   const contentArrange = [
     { number: 4, content: "Giá tăng dần" },
     { number: 5, content: "Giá giảm dần" },
@@ -51,14 +51,14 @@ const SearchTripPage: React.FC = () => {
             </div>
           </div>
           <div className="search-trip-container-l">
-            <h3>Kết quả: {listTrip.length}</h3>
+            {/* <h3>Kết quả: {listTrip.length}</h3>
             {listTrip.length > 0
               ? listTrip.map((_, index) => (
                   <div className="item-trip" key={index}>
                     <Trip />
                   </div>
                 ))
-              : "Hiện tại không có chuyến xe nào phù hợp với yêu cầu của bạn"}
+              : "Hiện tại không có chuyến xe nào phù hợp với yêu cầu của bạn"} */}
           </div>
         </div>
       </div>

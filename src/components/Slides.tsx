@@ -42,7 +42,7 @@ const Slides: React.FC<SlidesProps> = ({ slideList }) => {
             key={index}
             className={`${styles.slide} ${index === 1 ? styles.active : ""} ${animationClass}`}
           >
-            <img src={slide.img} alt="slide-img" />
+            <img className={styles.img} src={slide.img} alt="slide-img" />
           </div>
         ))}
       </div>
