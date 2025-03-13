@@ -1,12 +1,12 @@
-import { memo, useEffect, useRef, useState } from "react";
-import styled from "../styles/modules/InputDropDownList.module.scss";
-import { removeDiacritics } from "../utils/removeDiacritics";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faLocationDot } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { memo, useEffect, useRef, useState } from "react";
+import styled from "../styles/modules/components/InputDropDownList.module.scss";
+import { InputDropDownProps } from "../types/props";
+import { removeDiacritics } from "../utils/removeDiacritics";
 import DropDownList from "./DropDownList";
 import Input from "./Input";
-import { InputDropDownProps } from "../types/props";
-import IconDestination from "./IconDestination";
+import IconDeparture from "./IconDeparture";
 
 const InputDropDownList: React.FC<InputDropDownProps> = ({
   list,
@@ -39,7 +39,6 @@ const InputDropDownList: React.FC<InputDropDownProps> = ({
       setValueList(valueFiltered);
     }
   };
-  //
 
   const handleSelected = (value: string) => {
     console.log("selected-Input", value);
@@ -50,7 +49,6 @@ const InputDropDownList: React.FC<InputDropDownProps> = ({
       setIsDropDownVisible(false);
     }
   };
-  //
 
   const handleClick = () => {
     inputRef.current?.select();
@@ -97,18 +95,16 @@ const InputDropDownList: React.FC<InputDropDownProps> = ({
       <div className={`${styled["input-location"]} d-flex`}>
         <div className={styled["ic-search"]}>
           {location === "departure" ? (
+            <IconDeparture />
+          ) : (
             <FontAwesomeIcon
               className={`${styled.ic} ${styled["ic-departure"]}`}
               icon={faLocationDot}
             />
-          ) : (
-            <IconDestination />
           )}
         </div>
         <div className={styled["search-locations"]}>
-          <div className={styled.title}>
-            <label>{searchTitle}</label>
-          </div>
+          <label className={styled.title}>{searchTitle}</label>
           <Input
             ref={inputRef}
             type="text"

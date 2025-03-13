@@ -1,42 +1,55 @@
-import { useState } from "react";
-import InputDropDownList from "../components/InputDropDownList";
+import SearchTrip from "../components/SearchTrip";
+import Slides from "../components/Slides";
+import VideoPlayer from "../components/Video";
+import styles from "../styles/modules/pages/HomePage.module.scss";
+import img_slide_1 from "../assets/images/img_slide_1.png";
+import img_slide_2 from "../assets/images/img_slide_2.png";
+import img_slide_3 from "../assets/images/img_slide_3.png";
+import img_slide_4 from "../assets/images/img_slide_4.png";
+import img_slide_5 from "../assets/images/img_slide_5.png";
 
 const HomePage = () => {
-  const arr = [
-    "Đà Nẵng",
-    "Quãng Nam",
-    "Quãng Ngãi",
-    "Huế",
-    "Quãng Bình",
-    "Hà Nội",
-    "Hồ Chí Minh",
-    "Vũng Tàu",
-    "Hải Phòng",
-    "Cà Mau",
+  const slideList = [
+    {
+      title: "Banner",
+      img: img_slide_1,
+    },
+    {
+      title: "Banner",
+      img: img_slide_2,
+    },
+    {
+      title: "Banner",
+      img: img_slide_3,
+    },
+    {
+      title: "Banner",
+      img: img_slide_4,
+    },
+    {
+      title: "Banner",
+      img: img_slide_5,
+    },
   ];
-  const [value, setValue] = useState<string>("");
-  const handleSelectLocation = (value: string) => {
-    setValue(value);
-  };
-  const handleChangeValue = (value: string) => {
-    setValue(value);
-  };
-  const handleSearch = () => {
-    console.log("2", value);
-  };
   return (
-    <div className="d-flex justify-content-center">
-      <InputDropDownList
-        list={arr}
-        contentPlaceholder={"Điểm đi"}
-        searchTitle={"Nơi xuất phát"}
-        defaultValue={"Đà Nẵng"}
-        onSelected={handleSelectLocation}
-        onChangeValue={handleChangeValue}
-      />
-      <button type="submit" onClick={handleSearch}>
-        Search
-      </button>
+    <div className={styles["homepage-container"]}>
+      <div className="slider">
+        <Slides slideList={slideList} />
+      </div>
+      <div className={styles["banner-wrapper"]}>
+        <img
+          className={styles["img-banner"]}
+          src="https://static.vexere.com/production/banners/1209/leaderboard_1440x480.jpg"
+          alt="banner-wrapper"
+        />
+        <div className={styles["content-wrapper"]}>
+          <SearchTrip />
+        </div>
+      </div>
+      <div className={styles["search-trip-mobile"]}>
+        <SearchTrip />
+      </div>
+      <VideoPlayer />
     </div>
   );
 };

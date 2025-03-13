@@ -1,8 +1,16 @@
+@use "../mixin" as mix;
+
 .layout-wrapper {
   display: flex;
   flex-direction: column;
+
   min-height: 100vh;
+
+  @include mix.responsive(mobile) {
+    gap: 1rem;
+  }
+
   .content {
-    flex: 1;
+    flex-grow: 1; /* Main content sẽ co giãn để chiếm phần còn lại */
   }
 }

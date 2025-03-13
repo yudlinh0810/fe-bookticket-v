@@ -1,0 +1,43 @@
+.login {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.8rem;
+
+  .relative {
+    position: relative;
+    width: calc((100% - 10rem));
+    .input {
+      width: 100%;
+      padding: 0.4rem;
+      border: 0.0625rem solid #c3c3c3;
+      border-radius: 0.425rem;
+
+      list-style: none;
+      outline: none;
+
+      transition: border-color 0.3s;
+
+      &:focus {
+        border-color: #007bff;
+      }
+    }
+
+    .label {
+      position: absolute;
+      left: 0.45rem;
+      transform: translateY(54%);
+      padding: 0 0.225rem;
+
+      background-color: #fff;
+      transition: transform 0.3s ease-in-out, font-size 0.3s ease-in-out;
+      pointer-events: none; //Không ảnh hưởng khi click
+    }
+
+    .input:focus + .label,
+    .input:not(:placeholder-shown) + .label {
+      transform: translateY(-0.5rem);
+      font-size: 0.8rem;
+    }
+  }
+}

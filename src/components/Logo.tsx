@@ -1,5 +1,5 @@
 import React from "react";
-import styles from "../styles/modules/Logo.module.scss";
+import styles from "../styles/modules/components/Logo.module.scss";
 import LogoImage from "@/assets/icons/icon_vxr.jpg";
 import { LogoProps } from "../types/props";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -9,7 +9,12 @@ const Logo: React.FC<LogoProps> = ({ image, icon }) => {
     return <img className={styles.logo} src={LogoImage} />;
   }
   if (icon) {
-    return <FontAwesomeIcon className={styles.logo} icon={icon} style={{ color: "#ffffff" }} />;
+    return (
+      <div className={styles.logo}>
+        <FontAwesomeIcon className={styles.img} icon={icon} style={{ color: "#ffffff" }} />
+        <h1 className={styles.name}>Sylph Bus</h1>
+      </div>
+    );
   }
 };
 

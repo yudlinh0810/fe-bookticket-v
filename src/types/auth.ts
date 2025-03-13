@@ -1,27 +1,26 @@
 export interface User {
   readonly email: string;
-  surName: string;
-  name: string;
+  firstName?: string;
+  lastName?: string;
   phone?: string;
   birthDate?: Date;
+  portrait?: string;
   address?: string;
 }
 
 export interface PayLoad<T> {
   type: string;
-  payload: T;
-  error: Error;
+  payload?: T;
+  error?: Error;
 }
 
 export interface LoginPayLoad {
-  username: string;
+  // username: string;
+  email: string;
   password: string;
 }
 
 export interface RegisterPayLoad {
-  username: string;
-  surname: string;
-  name: string;
   email: string;
   password: string;
   confirmPassword: string;

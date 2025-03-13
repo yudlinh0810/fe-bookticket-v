@@ -50,31 +50,27 @@ const Footer = () => {
     },
   ];
   return (
-    <footer className="main-footer">
+    <footer className="footer-container">
       <div className="footer-top">
         <div className="footer-t-right">
           <div className="footer-contact">
-            <h3 className="font-medium perano-800 text-start">TRUNG TÂM TỔNG ĐÀI & CSKH</h3>
-            <p className="mg-t-1 mg-b-1 perano-800 fs-2 font-bold">1900 0770</p>
+            <h3>TRUNG TÂM TỔNG ĐÀI & CSKH</h3>
+            <p className="font-bold fs-2">1900 0770</p>
             <div className="footer-contact-info">
-              <h3 className="font-medium perano-800 text-start l-h-sm">
-                Công ty cổ phần xe khách IUA Bus Lines
-              </h3>
-              <p className="info-address gray l-h-sm">
+              <h3 className="">Công ty cổ phần xe khách Sylph Bus Lines</h3>
+              <p className="info-address">
                 Địa chỉ:
                 <span> 254 Đ. Nguyễn Văn Linh, Thạc Gián, Thanh Khê, Đà Nẵng.</span>
               </p>
-              <p className="info-email gray l-h-sm">
+              <p className="info-email">
                 Email:<span> yudlinh0810@gmail.com</span>
               </p>
-              <div className="info-phoneNumber-fax">
-                <p className="gray l-h-sm">
-                  Phone:<span> 0796777777</span>
-                </p>
-                <p className="gray l-h-sm">
-                  Fax:<span> 0972727272</span>
-                </p>
-              </div>
+              <p>
+                Phone:<span> 0796777777</span>
+              </p>
+              <p>
+                Fax:<span> 0972727272</span>
+              </p>
               <div className="info-social">
                 <h3 className="font-medium perano-800 l-h-sm">KẾT NỐI CHÚNG TÔI:</h3>
                 <div className="social-icons">
@@ -95,12 +91,12 @@ const Footer = () => {
         {/*  */}
         <div className="footer-t-left">
           <ul className="footer-links">
-            <li className="mg--1">
-              <h4 className="text-start perano-800 font-medium">IUA Bus Lines</h4>
+            <li>
+              <h4>Sylph Bus Lines</h4>
               <LinkList linkList={linksAbout} />
             </li>
-            <li className="mg-t-1 mg-b-1">
-              <h4 className="text-start perano-800 font-medium">Hỗ Trợ</h4>
+            <li>
+              <h4>Hỗ Trợ</h4>
               <LinkList linkList={linksSupport} />
             </li>
           </ul>

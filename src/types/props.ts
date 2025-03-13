@@ -1,22 +1,26 @@
+import { IconDefinition } from "@fortawesome/fontawesome-svg-core";
+
 export interface InputDropDownProps {
   searchTitle?: string;
   list: string[];
   contentPlaceholder?: string;
-  defaultValue?: string;
+  valueIn?: string;
+  location?: string;
   onSelected?: (selected: string) => void; //  Định nghĩa kiểu prop
   onChangeValue?: (value: string) => void;
 }
 
 export interface InputProps {
-  type: string;
+  type?: string;
   defaultValue?: string;
-  valueIn: string;
+  value?: string;
   placeholder?: string;
   onChange?: (valueChange: string) => void;
   onFocus?: (focused: boolean) => void;
 }
 
 export interface CustomLinkProps {
+  className?: string;
   to?: string;
   href?: string;
   title?: string;
@@ -32,3 +36,27 @@ export interface LinkItem {
 export interface LinkListProps {
   linkList: LinkItem[];
 }
+
+export interface LogoProps {
+  width?: number;
+  height?: number;
+  hidden?: boolean;
+  icon?: IconDefinition;
+  image?: string;
+}
+
+export type NavbarProps = {
+  status: boolean;
+  // onChangeStatusNavbar: (status: boolean) => void;
+};
+
+export interface SliderArrType {
+  title: string;
+  content: string;
+  image: string;
+}
+
+export type SlidersProps = {
+  title: string;
+  listSlider: SliderArrType[];
+};

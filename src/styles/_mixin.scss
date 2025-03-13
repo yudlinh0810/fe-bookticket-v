@@ -27,3 +27,11 @@
 @mixin slideDown($time) {
   animation: slideDown $time ease-in-out;
 }
+
+@mixin slideInLeft($time) {
+  animation: slideInLeft $time ease;
+}
+
+@mixin slideInRight($time) {
+  animation: slideInRight $time ease;
+}

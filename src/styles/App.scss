@@ -1,5 +1,9 @@
 #root {
   width: var(--client-width);
   padding: 0;
+
+  font-size: 0.875rem;
   box-sizing: border-box;
+
+  transition: all 0.4s;
 }

@@ -1,32 +1,56 @@
-.main-footer {
+@use "../mixin" as mix;
+.footer-container {
   display: flex;
   justify-content: center;
-
+  align-items: center;
   padding-top: 1rem;
+  margin-top: 5rem;
 
   text-align: start;
   word-wrap: break-word;
 
   background-color: #f0f7fd;
+
+  @include mix.responsive(mobile) {
+    padding: 1rem;
+  }
+
   .footer-top {
     display: flex;
+    gap: 4rem;
 
     padding-bottom: 2rem;
     margin: 0 auto;
 
-    gap: 4rem;
+    @include mix.responsive(mobile) {
+      display: block;
+      max-width: 18.75rem;
+    }
+
     .footer-t-right {
       display: flex;
       justify-content: center;
       width: 100%;
+
       .footer-contact {
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+
         max-width: 34rem;
+
+        .footer-contact-info {
+          display: flex;
+          flex-direction: column;
+          gap: 0.5rem;
+        }
+
         .footer-contact-phone {
           margin: 0.5rem 0;
           font-size: 2rem;
         }
         .info-social {
-          display: flex;
+          display: inline-block;
           gap: 1rem;
           .ic {
             height: 1.6rem;
@@ -46,6 +70,10 @@
       }
     }
     .footer-t-left {
+      @include mix.responsive(mobile) {
+        margin-top: 1rem;
+      }
+
       .layout-footer-links {
         display: flex;
         justify-content: center;
@@ -55,22 +83,6 @@
   }
 }
 
-@media screen and (min-width: 732px) and (max-width: 1024px) {
-  .main-footer {
-    & .footer-top {
-      display: block;
-    }
-  }
-}
-
-@media screen and (max-width: 731px) {
-  .main-footer {
-    & .footer-top {
-      display: block;
-      max-width: 300px;
-      .footer-t-left {
-        margin: 1rem 0;
-      }
-    }
-  }
+.font-bold {
+  font-weight: bold;
 }
