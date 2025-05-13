@@ -59,9 +59,9 @@ const SearchTrip = () => {
             onChangeValue={handleDepartureChangeValue}
           />
         </div>
-        <div className={`${styles.item} ${styles["item-full"]}`}>
+        <div className={`${styles["item-swap"]}`}>
           <FontAwesomeIcon
-            className={styles["ic-r-l"]}
+            className={styles["ic-swap"]}
             icon={faRightLeft}
             onClick={handleSwapLocation}
           />
