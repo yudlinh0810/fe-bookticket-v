@@ -115,10 +115,26 @@ blockquote:before,
 blockquote:after,
 q:before,
 q:after {
-  content: '';
+  content: "";
   content: none;
 }
 table {
   border-collapse: collapse;
   border-spacing: 0;
+}
+
+button {
+  padding: 0;
+  border: none;
+}
+
+button:focus {
+  outline: none;
+}
+a {
+  font-weight: 500;
+}
+
+textarea {
+  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
 }

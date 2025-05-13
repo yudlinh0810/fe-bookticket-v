@@ -1,5 +1,5 @@
 import { faCalendarDay } from "@fortawesome/free-solid-svg-icons";
-import styled from "../styles/modules/components/DateInput.module.scss";
+import styled from "../styles/dateInput.module.scss";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { memo, useEffect, useState } from "react";
 import { formatDate } from "../utils/formatDate";

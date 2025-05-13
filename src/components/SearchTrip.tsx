@@ -1,6 +1,6 @@
 import { useState } from "react";
 import InputDropDownList from "./InputDropDownList";
-import styles from "../styles/modules/components/SearchTrip.module.scss";
+import styles from "../styles/searchTrip.module.scss";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faRightLeft } from "@fortawesome/free-solid-svg-icons";
 import DateInput from "./DateInput";

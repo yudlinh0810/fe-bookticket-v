@@ -1,4 +1,4 @@
-import styled from "../styles/modules/components/IconDeparture.module.scss";
+import styled from "../styles/iconDeparture.module.scss";
 
 const IconDeparture = () => {
   return <div className={styled["ic-departure"]}></div>;

@@ -1,5 +1,5 @@
 import React from "react";
-import styled from "../styles/modules/components/DropDownList.module.scss";
+import styled from "../styles/dropDownList.module.scss";
 import sortString from "../utils/sortString";
 
 const DropDownList = ({

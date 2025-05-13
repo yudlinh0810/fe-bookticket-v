@@ -1,5 +1,5 @@
 import React from "react";
-import styles from "../styles/modules/components/Logo.module.scss";
+import styles from "../styles/logo.module.scss";
 import LogoImage from "@/assets/icons/icon_vxr.jpg";
 import { LogoProps } from "../types/props";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";

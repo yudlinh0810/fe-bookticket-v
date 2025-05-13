@@ -1,5 +1,5 @@
 import { Dispatch } from "redux";
-import { fetchUser } from "../../services/userServices";
+import { fetchUser } from "../../services/userServices.service";
 import { AxiosError } from "axios";
 import { User } from "../../types";
 

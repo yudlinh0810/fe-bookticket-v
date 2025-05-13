@@ -1,4 +1,5 @@
-@use "../../mixin" as mix;
+@use "./mixin" as mix;
+
 .homepage-container {
   display: flex;
   flex-direction: column;

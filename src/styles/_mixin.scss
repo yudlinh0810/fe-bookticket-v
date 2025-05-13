@@ -1,4 +1,4 @@
-@use "animations.scss";
+@use "./animations.scss";
 
 @mixin responsive($size) {
   @if $size == mobile {
@@ -7,6 +7,10 @@
     }
   } @else if $size == tablet {
     @media (max-width: 1024px) {
+      @content;
+    }
+  } @else if $size == desktop {
+    @media (min-width: 1025px) {
       @content;
     }
   }

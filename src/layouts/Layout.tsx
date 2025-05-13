@@ -1,29 +1,27 @@
-import React from "react";
-import Header from "../components/Header";
 import Footer from "../components/Footer";
-import "../styles/layouts/Layout.scss";
-// import Navbar from "../components/Navbar";
+import Header from "../components/Header";
+import styles from "../styles/layout.module.scss";
 
 interface LayoutProps {
   children: React.ReactNode;
 }
+
 const Layout: React.FC<LayoutProps> = ({ children }) => {
-  // const [statusNavbar, setStatusNavbar] = useState<boolean>(false);
-  // const navbarRef = useRef<HTMLDivElement>(null);
-
-  // const handleChangeStatusNavbar = (status: boolean) => {
-  //   setStatusNavbar(status);
-  // };
-
   return (
-    <div className="layout-wrapper">
-      <Header
-      //  onChangeStatusNavbar={handleChangeStatusNavbar} statusNavbar={statusNavbar}
-      />
-      {/* {statusNavbar } */}
-      {/* <Navbar ref={navbarRef} status={statusNavbar} /> */}
-      <main className="content">{children}</main>
-      <Footer />
+    <div className={styles["wrapper-layout"]}>
+      <div className={styles["main-layout"]}>
+        <main className={`${styles.main} ${styles.center}`}>
+          <div className={styles["wrapper-header-main"]}>
+            <header className={styles.header}>
+              <Header />
+            </header>
+            {children}
+          </div>
+        </main>
+        <footer className={`${styles.footer} ${styles.center}`}>
+          <Footer />
+        </footer>
+      </div>
     </div>
   );
 };

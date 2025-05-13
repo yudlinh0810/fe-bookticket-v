@@ -1,4 +1,4 @@
-@use "../../mixin" as mix;
+@use "./mixin" as mix;
 
 .slider-container {
   width: 300px;
@@ -36,13 +36,13 @@
     // opacity: 1;
   }
 
-  &.next {
-    @include mix.slideInRight(0.6s);
-  }
+  // &.next {
+  //   @include mix.slideInRight(0.6s);
+  // }
 
-  &.prev {
-    @include mix.slideInLeft(0.6s);
-  }
+  // &.prev {
+  //   @include mix.slideInLeft(0.6s);
+  // }
 
   .img {
     object-fit: cover;

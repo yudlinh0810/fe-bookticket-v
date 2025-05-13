@@ -1,5 +1,5 @@
 import React, { useRef } from "react";
-import styles from "../styles/modules/components/OtpInput.module.scss";
+import styles from "../styles/otpInput.module.scss";
 
 interface OTPInputProps {
   length: number;

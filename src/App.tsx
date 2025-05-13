@@ -5,7 +5,6 @@ import "./styles/Reset.scss";
 import HomePage from "./pages/HomePage";
 import Layout from "./layouts/Layout";
 import useClientWidth from "./utils/useClientWidth";
-import VerifyOTPPage from "./pages/VerifyOtpPage";
 
 function App() {
   useClientWidth();
@@ -17,14 +16,6 @@ function App() {
           element={
             <Layout>
               <HomePage />
-            </Layout>
-          }
-        />
-        <Route
-          path="/otp"
-          element={
-            <Layout>
-              <VerifyOTPPage />
             </Layout>
           }
         />

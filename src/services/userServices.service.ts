@@ -1,4 +1,4 @@
-import bookTicketsAPI from "./customizeAxios";
+import { bookTicketsAPI } from "./customizeAxios.service";
 
 export const fetchUser = async (token: string) => {
   try {

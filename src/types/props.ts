@@ -45,11 +45,6 @@ export interface LogoProps {
   image?: string;
 }
 
-export type NavbarProps = {
-  status: boolean;
-  // onChangeStatusNavbar: (status: boolean) => void;
-};
-
 export interface SliderArrType {
   title: string;
   content: string;

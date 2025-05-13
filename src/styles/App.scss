@@ -1,9 +1,12 @@
 #root {
   width: var(--client-width);
-  padding: 0;
-
-  font-size: 0.875rem;
   box-sizing: border-box;
+  overflow: hidden;
 
-  transition: all 0.4s;
+  line-height: 1.3rem;
+}
+.custom-toast {
+  white-space: normal !important;
+  word-break: break-word;
+  max-width: 90%;
 }
