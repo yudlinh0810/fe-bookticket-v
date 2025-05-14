@@ -2,7 +2,6 @@ import { faCalendarDay } from "@fortawesome/free-solid-svg-icons";
 import styled from "../styles/dateInput.module.scss";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { memo, useEffect, useState } from "react";
-import { formatDate } from "../utils/formatDate";
 
 const DateInput = ({ title }: { title: string }) => {
   const [currentDate, setCurrentDate] = useState<string>("");
@@ -20,8 +19,6 @@ const DateInput = ({ title }: { title: string }) => {
     const formatterDate = today.toISOString().split("T")[0];
     setCurrentDate(formatterDate);
   }, []);
-
-  console.log("date", formatDate(currentDate, undefined, true));
 
   return (
     <div className={styled["date-input-container"]}>

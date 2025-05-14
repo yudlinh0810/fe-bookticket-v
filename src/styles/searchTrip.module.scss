@@ -6,11 +6,12 @@
   align-items: center;
   gap: 1rem;
 
-  width: auto;
+  max-width: 51.05rem;
   height: auto;
   padding: 1rem;
-  border: 1px solid #c3c3c3;
+  border: 1px solid var(--primary);
   border-radius: 0.725rem;
+
   background-color: #fff;
 
   @include mix.responsive(tablet) {

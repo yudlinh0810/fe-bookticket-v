@@ -22,10 +22,6 @@
 
       margin-left: 1rem;
 
-      @include mix.responsive(desktop) {
-        margin-left: 0;
-      }
-
       .action__show-side-bar {
         display: block;
         height: 0;
@@ -65,16 +61,21 @@
       }
     }
     .login-register {
+      position: relative;
       flex: 1;
       margin-right: 1rem;
 
-      @include mix.responsive(desktop) {
-        margin-left: 0;
-      }
+      .login-register__button {
+        position: absolute;
+        top: -1rem;
+        right: 0;
 
-      .login-register__link {
         display: flex;
-        justify-content: end;
+        align-items: center;
+        gap: 0.225rem;
+
+        padding: 0.5rem;
+        border-radius: 2rem;
 
         color: var(--black);
         font-weight: 400;
@@ -84,22 +85,97 @@
 
           width: max-content;
 
-          padding: 0.5rem;
-          border-radius: 0.225rem;
+          @include mix.responsive(desktop) {
+            display: block;
+          }
+        }
+      }
+    }
 
-          background-color: var(--light-gray);
+    .user-actions {
+      z-index: 11;
+      position: relative;
+      flex: 1;
+      margin-right: 1rem;
+
+      &__button {
+        position: absolute;
+        top: -1rem;
+        right: 0;
+
+        display: flex;
+        align-items: center;
+        gap: 0.225rem;
+
+        padding: 0.5rem;
+        border-radius: 2rem;
+
+        background-color: var(--white);
+        color: var(--black);
+        font-weight: 400;
+
+        .user-actions__link-text {
+          display: none;
+
+          width: max-content;
 
           @include mix.responsive(desktop) {
             display: block;
           }
         }
+      }
 
-        .login-register__link-ic {
-          display: block;
-          color: var(--white);
-          @include mix.responsive(desktop) {
-            display: none;
+      &__list,
+      .triangle {
+        position: absolute;
+      }
+
+      &__list {
+        z-index: 1;
+        top: 1.8rem;
+        right: 0;
+
+        border-radius: 0.7rem;
+
+        background-color: var(--white);
+
+        .item {
+          padding: 0.5rem 1rem;
+          border-bottom: 1px solid var(--warning);
+
+          cursor: pointer;
+          transition: background-color 0.3s;
+
+          .text {
+            color: var(--dark);
+            transition: all 0.3s;
           }
+
+          &:last-child {
+            border: none;
+          }
+
+          &:hover > .text {
+            color: var(--bright-blue);
+          }
+        }
+      }
+
+      .triangle {
+        top: 0.8rem;
+        right: 1rem;
+        width: 0;
+        height: 0;
+        z-index: 1;
+
+        &::after {
+          content: "";
+          position: absolute;
+          top: 0.5rem;
+          right: 0.7rem;
+          border-left: 0.6rem solid transparent;
+          border-right: 0.6rem solid transparent;
+          border-bottom: 0.6rem solid var(--white);
         }
       }
     }

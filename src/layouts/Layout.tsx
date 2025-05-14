@@ -1,3 +1,4 @@
+import AuthModal from "../components/AuthModal";
 import Footer from "../components/Footer";
 import Header from "../components/Header";
 import styles from "../styles/layout.module.scss";
@@ -9,19 +10,15 @@ interface LayoutProps {
 const Layout: React.FC<LayoutProps> = ({ children }) => {
   return (
     <div className={styles["wrapper-layout"]}>
-      <div className={styles["main-layout"]}>
-        <main className={`${styles.main} ${styles.center}`}>
-          <div className={styles["wrapper-header-main"]}>
-            <header className={styles.header}>
-              <Header />
-            </header>
-            {children}
-          </div>
-        </main>
-        <footer className={`${styles.footer} ${styles.center}`}>
-          <Footer />
-        </footer>
-      </div>
+      <header className={styles.header}>
+        <Header />
+      </header>
+      <main className={`${styles.main} ${styles.center}`}>{children}</main>
+      <footer className={`${styles.footer} ${styles.center}`}>
+        <Footer />
+      </footer>
+      {/* auth modal */}
+      <AuthModal />
     </div>
   );
 };

@@ -5,14 +5,20 @@ import { NavLink, useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faRightFromBracket, faUser } from "@fortawesome/free-solid-svg-icons";
 import { toast } from "react-toastify";
-import { logout } from "../services/auth.service";
+import { logoutUser } from "../services/auth.service";
 import logo from "../assets/images/logo-booking-bus.png";
+import { useAuthModalStore } from "../store/authModalStore";
+import { useUserStore } from "../store/userStore";
 
 const Header = () => {
   const navigate = useNavigate();
   const sideBarRef = useRef<HTMLDivElement>(null);
   const [collapsed, setCollapsed] = useState<boolean>(true);
   const [labguageIcon, setLanguageIcon] = useState<boolean>(true);
+  const openAuthModal = useAuthModalStore((state) => state.openModal);
+  const { user, logout } = useUserStore();
+  const [showDropDown, setShowDropDown] = useState<boolean>(false);
+  const wrapperRef = useRef<HTMLDivElement>(null);
 
   const handleToggleSideBar = () => {
     setCollapsed(!collapsed);
@@ -22,6 +28,20 @@ const Header = () => {
     setLanguageIcon(!labguageIcon);
   };
 
+  const handleLogout = async () => {
+    const response = await logoutUser();
+    if (response && response.status === "OK") {
+      localStorage.removeItem("accept");
+      localStorage.removeItem("expirationTime");
+      logout();
+      toast.success("Đăng xuất thành công");
+      navigate("/");
+    } else {
+      toast.error("Đăng xuất thất bại");
+      return;
+    }
+  };
+
   const handleClickOutSide = (e: MouseEvent) => {
     e.stopPropagation();
     if (!collapsed && sideBarRef.current && !sideBarRef.current.contains(e.target as Node)) {
@@ -29,17 +49,18 @@ const Header = () => {
     }
   };
 
-  const handleLogout = async () => {
-    const response = await logout();
-    if (response.status === "OK") {
-      toast.success("Đăng xuất thành công");
-      localStorage.removeItem("accept");
-      localStorage.removeItem("expirationTime");
-      navigate("/");
-    } else {
-      toast.error("Đăng xuất thất bại");
+  const handleClickOutSideDropList = (e: MouseEvent) => {
+    if (wrapperRef.current && !wrapperRef.current.contains(e.target as Node)) {
+      setShowDropDown(false);
     }
   };
+
+  useEffect(() => {
+    if (showDropDown) {
+      document.addEventListener("mousedown", handleClickOutSideDropList);
+      return () => document.removeEventListener("mousedown", handleClickOutSideDropList);
+    }
+  }, [showDropDown]);
 
   useEffect(() => {
     if (!collapsed) {
@@ -78,12 +99,49 @@ const Header = () => {
           <img src={logo} alt="logo" className={styled["logo-banner__img"]} />
         </div>
 
-        <div className={styled["login-register"]}>
-          <NavLink to="/login" className={styled["login-register__link"]}>
-            <span className={styled["login-register__link-text"]}>Đăng nhập/Đăng ký</span>
-            <FontAwesomeIcon icon={faUser} className={styled["login-register__link-ic"]} />
-          </NavLink>
-        </div>
+        {!user ? (
+          <div className={styled["login-register"]}>
+            <button
+              type="button"
+              className={styled["login-register__button"]}
+              onClick={() => openAuthModal("login")}
+            >
+              <FontAwesomeIcon icon={faUser} className={styled["login-register__link-ic"]} />
+              <p className={styled["login-register__link-text"]}>Đăng nhập/Đăng ký</p>
+            </button>
+          </div>
+        ) : (
+          <div className={styled["user-actions"]}>
+            <div
+              className={styled["user-actions__button"]}
+              onMouseEnter={() => setShowDropDown(true)}
+              onClick={() => setShowDropDown((prev) => !prev)}
+            >
+              <FontAwesomeIcon icon={faUser} className={`${styled["user-ic"]}`} />
+              <p className={styled["user-actions__link-text"]}>{user.fullName}</p>
+            </div>
+            {showDropDown ? (
+              <div ref={wrapperRef} className={styled["wrapper-drop-down-list"]}>
+                <ul className={styled["user-actions__list"]}>
+                  <li className={styled["item"]}>
+                    <NavLink className={styled.text} to={`/profile`}>
+                      Cập nhật thông tin
+                    </NavLink>
+                  </li>
+                  <li className={styled["item"]}>
+                    <NavLink className={styled.text} to={`/settings`}>
+                      Cài đặt
+                    </NavLink>
+                  </li>
+                  <li className={styled["item"]} onClick={handleLogout}>
+                    <span className={styled.text}>Đăng xuất</span>
+                  </li>
+                </ul>
+                <span className={styled.triangle}></span>
+              </div>
+            ) : null}
+          </div>
+        )}
       </div>
       <div className={styled["bottom-header"]}>
         <div className={styled["bottom-header__menu"]}>
