@@ -5,6 +5,7 @@ import { login } from "../services/auth.service";
 import { useUserStore } from "../store/userStore";
 import { toast } from "react-toastify";
 import { useAuthModalStore } from "../store/authModalStore";
+import SocialAuth from "./SocialAuth";
 
 const LoginForm = () => {
   const [dataLogin, setDataLogin] = useState<LoginPayLoad>({
@@ -78,14 +79,7 @@ const LoginForm = () => {
         <span>hoặc</span>{" "}
       </div>
       <div className={styled["another-actions"]}>
-        <div className={styled["btn-group"]}>
-          <button type="button" className={styled["btn-item"]}>
-            Tiếp tục với Google
-          </button>
-          <button type="button" className={styled["btn-item"]}>
-            Tiếp tục với Facebook
-          </button>
-        </div>
+        <SocialAuth />
         <div className={styled["action-register"]}>
           <p> Bạn chưa có tài khoản?</p>
           <button type="button" className={styled.btn} onClick={() => setType("register")}>

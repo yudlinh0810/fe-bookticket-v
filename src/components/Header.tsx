@@ -34,6 +34,7 @@ const Header = () => {
       localStorage.removeItem("accept");
       localStorage.removeItem("expirationTime");
       logout();
+      setCollapsed(true);
       toast.success("Đăng xuất thành công");
       navigate("/");
     } else {
@@ -231,13 +232,15 @@ const Header = () => {
                 <span className={styled["side-bar-mobile__section-title"]}>Tuyển dụng</span>
               </NavLink>
             </li>
-            <li className={`${styled["side-bar-mobile__menu-item"]} ${styled["action-logout"]}`}>
-              <FontAwesomeIcon
-                icon={faRightFromBracket}
-                className={styled["ic-default"]}
-                onClick={handleLogout}
-              />
-            </li>
+            {user ? (
+              <li className={`${styled["side-bar-mobile__menu-item"]} ${styled["action-logout"]}`}>
+                <FontAwesomeIcon
+                  icon={faRightFromBracket}
+                  className={styled["ic-default"]}
+                  onClick={handleLogout}
+                />
+              </li>
+            ) : null}
           </ul>
         </nav>
       </div>

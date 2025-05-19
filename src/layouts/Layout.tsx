@@ -1,4 +1,5 @@
 import AuthModal from "../components/AuthModal";
+import ChatBox from "../components/ChatBox";
 import Footer from "../components/Footer";
 import Header from "../components/Header";
 import styles from "../styles/layout.module.scss";
@@ -13,10 +14,12 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
       <header className={styles.header}>
         <Header />
       </header>
-      <main className={`${styles.main} ${styles.center}`}>{children}</main>
+      <main className={`${styles.main}`}>{children}</main>
       <footer className={`${styles.footer} ${styles.center}`}>
         <Footer />
       </footer>
+      {/* ChatBox */}
+      <ChatBox />
       {/* auth modal */}
       <AuthModal />
     </div>

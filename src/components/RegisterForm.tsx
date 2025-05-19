@@ -6,6 +6,7 @@ import CustomModal from "./CustomModal";
 import { toast } from "react-toastify";
 import Otp from "./Otp";
 import { useAuthModalStore } from "../store/authModalStore";
+import SocialAuth from "./SocialAuth";
 
 const RegisterForm = () => {
   const { closeModal, setType } = useAuthModalStore();
@@ -104,14 +105,7 @@ const RegisterForm = () => {
         <span>hoặc</span>{" "}
       </div>
       <div className={styled["another-actions"]}>
-        <div className={styled["btn-group"]}>
-          <button type="button" className={styled["btn-item"]}>
-            Tiếp tục với Google
-          </button>
-          <button type="button" className={styled["btn-item"]}>
-            Tiếp tục với Facebook
-          </button>
-        </div>
+        <SocialAuth />
         <div className={styled["action-login"]}>
           <p>Bạn đã có tài khoản?</p>
           <button type="button" className={styled.btn} onClick={() => setType("login")}>

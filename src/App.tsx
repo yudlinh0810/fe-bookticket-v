@@ -22,7 +22,7 @@ function App() {
           }
         />
         <Route
-          path="/search-trip"
+          path="/tim-kiem"
           element={
             <Layout>
               <SearchTripPage />

@@ -34,9 +34,9 @@ export const formatDate = (
   if (format.includes("HH:mm")) {
     const hours = date.getHours().toString().padStart(2, "0");
     const minutes = date.getMinutes().toString().padStart(2, "0");
-    const result = `${formatterDate} ${hours}:${minutes}`;
+    const result = `${hours}:${minutes} ${formatterDate}`;
 
-    if (day) return `${getDay} ${result}`;
+    if (day) return `${result} ${getDay}`;
     return result;
   }
 

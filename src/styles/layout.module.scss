@@ -1,9 +1,11 @@
 @use "./mixin" as mix;
 .wrapper-layout {
+  position: relative;
   overflow-x: hidden;
-  overflow-y: auto;
+  overflow-y: scroll;
   display: flex;
   flex-direction: column;
+
   width: 100%;
   min-height: 100vh;
 
@@ -16,8 +18,12 @@
 }
 
 .main {
+  flex: 1;
+  overflow-y: auto;
+
   display: flex;
   justify-content: center;
+  align-items: flex-start;
 }
 
 .footer {
