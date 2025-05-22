@@ -1,6 +1,6 @@
 import axios from "axios";
-
 import { toast } from "react-toastify";
+import { getAccessToken, setAccessToken, clearAccessToken } from "../utils/auth";
 
 type FailedRequest = {
   resolve: (value?: unknown) => void;
@@ -10,29 +10,35 @@ type FailedRequest = {
 let isRefreshing = false;
 let failedQueue: FailedRequest[] = [];
 
-const processQueue = (error: unknown) => {
+const processQueue = (error: unknown, token?: string) => {
   failedQueue.forEach((prom) => {
     if (error) {
       prom.reject(error);
     } else {
-      prom.resolve();
+      prom.resolve(token);
     }
   });
   failedQueue = [];
 };
 
-export const bookTicketAPI = axios.create({
-  baseURL: `https://${import.meta.env.VITE_API_URL}.ngrok-free.app/api`,
-  withCredentials: true, // Gửi kèm cookie
-  headers: { "ngrok-skip-browser-warning": "true" },
-});
+const createAxiosInstance = () =>
+  axios.create({
+    baseURL: `https://${import.meta.env.VITE_API_URL}.ngrok-free.app/api`,
+    withCredentials: true,
+    headers: { "ngrok-skip-browser-warning": "true" },
+  });
 
-// Request Interceptor
+export const bookTicketAPI = createAxiosInstance();
+export const paymentAPI = createAxiosInstance();
+
 bookTicketAPI.interceptors.request.use((config) => {
-  return config; // Không cần thêm Authorization nữa
+  const token = getAccessToken();
+  if (token) {
+    config.headers.Authorization = `Bearer ${token}`;
+  }
+  return config;
 });
 
-// Response Interceptor
 bookTicketAPI.interceptors.response.use(
   (response) => response.data || [],
   async (error) => {
@@ -42,24 +48,29 @@ bookTicketAPI.interceptors.response.use(
       if (isRefreshing) {
         return new Promise((resolve, reject) => {
           failedQueue.push({ resolve, reject });
-        }).then(() => bookTicketAPI(originalRequest));
+        }).then((token) => {
+          originalRequest.headers.Authorization = `Bearer ${token}`;
+          return bookTicketAPI(originalRequest);
+        });
       }
 
       originalRequest._retry = true;
       isRefreshing = true;
 
       try {
-        // Gọi refresh token - BE sẽ đặt lại access_token vào HttpOnly cookie
-        await bookTicketAPI.get("/user/auth/refresh-token");
-
-        processQueue(null);
+        const res = await bookTicketAPI.get("/user/auth/refresh-token");
+        const newToken = res.data.access_token;
+        setAccessToken(newToken);
+        processQueue(null, newToken);
         isRefreshing = false;
 
+        originalRequest.headers.Authorization = `Bearer ${newToken}`;
         return bookTicketAPI(originalRequest);
       } catch (refreshError) {
         processQueue(refreshError);
         isRefreshing = false;
 
+        clearAccessToken();
         toast.warning("Phiên đăng nhập đã hết hạn, vui lòng đăng nhập lại!");
         window.location.href = "/login";
 
@@ -71,17 +82,15 @@ bookTicketAPI.interceptors.response.use(
   }
 );
 
-export const paymentAPI = axios.create({
-  baseURL: `https://${import.meta.env.VITE_API_URL}.ngrok-free.app/api`,
-  withCredentials: true,
-  headers: { "ngrok-skip-browser-warning": "true" },
+paymentAPI.interceptors.request.use((config) => {
+  const token = getAccessToken();
+  if (token) {
+    config.headers.Authorization = `Bearer ${token}`;
+  }
+  return config;
 });
 
 paymentAPI.interceptors.response.use(
-  (response) => {
-    return response.data || [];
-  },
-  (error) => {
-    return Promise.reject(error);
-  }
+  (response) => response.data || [],
+  (error) => Promise.reject(error)
 );

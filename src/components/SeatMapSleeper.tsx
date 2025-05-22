@@ -12,21 +12,27 @@ const SeatMapSleeper = ({
 }) => {
   const [seats, setSeats] = useState<SeatType[]>(initialSeats);
 
-  const handleSelectedSeat = (updatedSeat: SeatType) => {
-    if (onSelected) {
-      setSeats((prevSeats) =>
-        prevSeats.map((seat) => (seat.position === updatedSeat.position ? updatedSeat : seat))
-      );
-    } else {
-      toast.warning("Bạn không có quyền thay đổi trạng thái của nó");
-    }
-  };
-
   useEffect(() => {
     if (onSelected) {
-      onSelected(seats);
+      const selectedSeats = seats.filter((seat) => seat.status === "selecting");
+      onSelected(selectedSeats);
     }
-  }, [seats, onSelected]);
+  }, [seats]);
+
+  const handleSelectedSeat = (updatedSeat: SeatType) => {
+    setSeats((prevSeats) => {
+      const newSeats = prevSeats.map((seat) =>
+        seat.position === updatedSeat.position ? updatedSeat : seat
+      );
+      const selectedSeats = newSeats.filter((seat) => seat.status === "selecting");
+      console.log("selected", selectedSeats);
+      if (selectedSeats.length > 5) {
+        toast.warning("Bạn chỉ có thể chọn tối đa 5 ghế");
+        return prevSeats;
+      }
+      return newSeats;
+    });
+  };
 
   const renderFloor = (floor: "top" | "bottom") => {
     const floorSeats = seats.filter((seat) => seat.floor === floor);
@@ -51,12 +57,7 @@ const SeatMapSleeper = ({
           {rows.map((row, rowIndex) => (
             <div className={styles["seat-row"]} key={rowIndex}>
               {row.map((seat) => (
-                <Seat
-                  key={seat.position}
-                  seatValue={seat}
-                  useStatus="unavailable"
-                  onSelected={handleSelectedSeat}
-                />
+                <Seat key={seat.position} seatValue={seat} onSelected={handleSelectedSeat} />
               ))}
             </div>
           ))}

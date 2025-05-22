@@ -7,9 +7,30 @@ import Layout from "./layouts/Layout";
 import useClientWidth from "./utils/useClientWidth";
 import SearchTripPage from "./pages/SearchTripPage";
 import { ToastContainer } from "react-toastify";
+import BookedPage from "./pages/BookedPage";
+import { useEffect } from "react";
+import { bookTicketAPI } from "./services/customizeAxios.service";
+import { setAccessToken } from "./utils/auth";
 
 function App() {
+  useEffect(() => {
+    const refreshAccessToken = async () => {
+      try {
+        const res = await bookTicketAPI.get("/user/auth/refresh-token");
+        const newToken = res.data.access_token;
+        if (newToken) {
+          setAccessToken(newToken);
+        }
+      } catch {
+        console.log("Không thể refresh token, cần login lại.");
+      }
+    };
+
+    refreshAccessToken();
+  }, []);
+
   useClientWidth();
+
   return (
     <Router>
       <Routes>
@@ -29,10 +50,18 @@ function App() {
             </Layout>
           }
         />
+        <Route
+          path="/dat-ve"
+          element={
+            <Layout>
+              <BookedPage />
+            </Layout>
+          }
+        />
       </Routes>
       <ToastContainer
         className="custom-toast"
-        position="top-center"
+        position="top-right"
         autoClose={700}
         hideProgressBar={false}
         newestOnTop={false}

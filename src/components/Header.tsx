@@ -9,6 +9,7 @@ import { logoutUser } from "../services/auth.service";
 import logo from "../assets/images/logo-booking-bus.png";
 import { useAuthModalStore } from "../store/authModalStore";
 import { useUserStore } from "../store/userStore";
+import { clearAccessToken } from "../utils/auth";
 
 const Header = () => {
   const navigate = useNavigate();
@@ -34,6 +35,7 @@ const Header = () => {
       localStorage.removeItem("accept");
       localStorage.removeItem("expirationTime");
       logout();
+      clearAccessToken();
       setCollapsed(true);
       toast.success("Đăng xuất thành công");
       navigate("/");

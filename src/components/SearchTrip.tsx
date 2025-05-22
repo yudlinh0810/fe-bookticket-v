@@ -8,7 +8,7 @@ import { getLocations } from "../services/trip.service";
 import { useQuery } from "@tanstack/react-query";
 import Loading from "./Loading";
 import { useNavigate } from "react-router";
-import { ParamsSearchTrip } from "../types/trip";
+import { ParamsSearchTrips } from "../types/trip";
 
 interface SearchTripType {
   from: string;
@@ -17,7 +17,7 @@ interface SearchTripType {
 }
 
 interface SearchTripProps {
-  valueSearchIn?: ParamsSearchTrip;
+  valueSearchIn?: ParamsSearchTrips;
 }
 
 const SearchTrip: React.FC<SearchTripProps> = ({ valueSearchIn }) => {

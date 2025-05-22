@@ -6,6 +6,7 @@ import { useUserStore } from "../store/userStore";
 import { toast } from "react-toastify";
 import { useAuthModalStore } from "../store/authModalStore";
 import SocialAuth from "./SocialAuth";
+import { setAccessToken } from "../utils/auth";
 
 const LoginForm = () => {
   const [dataLogin, setDataLogin] = useState<LoginPayLoad>({
@@ -27,7 +28,9 @@ const LoginForm = () => {
     e.preventDefault();
     const result = await login(dataLogin);
     if (result.status === "OK" && result.data) {
+      setAccessToken(result.access_token);
       setUser({
+        id: result?.data?.id,
         email: result?.data?.email,
         fullName: result?.data?.fullName,
         dateBirth: result?.data?.dateBirth,
